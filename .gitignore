@@ -1,0 +1,13 @@
+*.pptx
+*.zip
+*.mat
+!/Results/**/*.mat
+!/Inputs/**/*.mat
+!/Targets/**/*.mat
+*.exe
+*.xlsx
+*.fig
+*.tiff
+*.tif
+*.png
+

@@ -1,0 +1,604 @@
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 20).
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,V)p(1)./(1+exp(-(V-p(2))./p(3)))+p(4)
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,V)p(1)./(1+exp(-(V-p(2))./p(3)))+p(4)
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,Il)(p(3)./(p(1).*Il.^(1./(p(2)*log(10)))+1))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,Il)(p(3)./(p(1).*Il.^(1./(p(2)*log(10)))+1))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,I)(1./(1+p(1).*I.^(-1./(p(2)*log(10)))))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,I)1-(p(3)./(1+p(1).*I.^(-1./(p(2)*log(10)))))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,V)p(1)*(V-p(2))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,I)1-(p(3)./(1+exp(p(1)/p(2)).*I.^(-1./(p(2)*log(10)))))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(funV,funI)funV.*funI
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(funV,funI)funV.*funI
+> In runfit22HH_LIS (line 47)
+
+ all target values are included in tau rec 
+
+ new fields added at lv2 1: w, wtr 
+
+ new fields added at lvl3 : TimeLimit 
+
+ new fields added at lvl3 : TimeLimit 
+
+flags
+------
+chekcDoubleflag: true
+errorbarflag: true 
+HPC flag; false
+plotflag: true 
+plot features: true
+plot Tau: true
+sortflag: true 
+memorySave flag: false
+timeflag: true 
+include TauRecovery data: true
+plot Tau Recov as well: true 
+Outfun plot flag: false 
+inlcude tau Recov in final optimization: true 
+include Iratio in goda: false 
+correct TauDA0 not being equal to Taurec: true 
+
+ adj_flags
+---------
+adj Fields recal options FB IV dependence: false
+adj Fields options TauO: true
+adj Fields options TauDA: true
+adj Fields options G Oinf DAin: true
+adj Fields options final optimisation: true
+
+ fit options
+----------
+maximum iterations: 1.00e+06
+maximum time: 2.88e+04
+maximum function evaluations: 1.00e+06
+Start points ms: all
+function tolerance: 1.00e-10
+X tolerance: 1.00e-10
+nr multistart recal options FBIVdepend TauO: 20
+nr multistart recal options FBIVdepend TauDA: 20
+nr multistart options TauO: 200
+nr multistart options TauDA: 200
+nr multistart options G Oinf DAin: 300
+nr multistart final optimization FB ms: 700
+nr multistart final optimization FB TauRecov estimation: 20
+
+Methods and inputs
+----------
+power a: 1 
+power b: 1 
+featurenames included: Ipeak Iss Imean Iratio Imean TauOn TauOff TauInact ttp I
+Taurecovery featnames: TauRecov
+Target type IVdependencies: features
+fit Order: GODA-tDA-tO
+solver method TauO: lsqcurvefit
+solver method TauDA: lsqcurvefit
+Options LB UB scaling: frac_initb
+Ode Options: RelTol = 1.00e-08
+Ode Options: AbsTol = 1.00e-08
+Ode Options: Maxstep = 1.00e-04
+weights G Oinf DAinf: input
+Solver Method GODA: ga
+final optimization selection: all
+final optimization objective method: features
+final optimization solverMethod: ga
+TauRecov method: currenttraces
+weights fopt FB: input
+
+ new fields added at lvl 1: Logistics_TI, Logistics_TO, symLogisticsloginv_TO, symLogisticsloginv_TI, symLogisticslog_O, symLogisticsloga_DA, Gr_cte 
+
+ start fitting current dependecies Oinf, DAinf, Grect 
+
+ 1 out off 1 
+start ga GODA
+Optimization terminated: average change in the fitness value less than options.FunctionTolerance
+ and constraint violation is less than options.ConstraintTolerance.
+ Iter  Func-count            Fval   Feasibility   Step Length       Norm of   First-order  
+                                                                       step    optimality
+    0           8    8.460390e+01     0.000e+00     1.000e+00     0.000e+00     8.822e+02  
+    1          32    8.460252e+01     0.000e+00     3.323e-03     2.261e-03     4.979e+02  
+    2          52    8.458741e+01     0.000e+00     1.384e-02     9.155e-03     2.128e+02  
+    3          66    8.458463e+01     0.000e+00     1.176e-01     1.820e-02     5.808e+02  
+    4          88    8.458233e+01     0.000e+00     6.782e-03     3.887e-02     2.340e+02  
+    5          96    8.457106e+01     0.000e+00     1.000e+00     1.023e-01     1.366e+02  
+    6         104    8.456805e+01     0.000e+00     1.000e+00     7.784e-02     7.527e+00  
+    7         112    8.456792e+01     0.000e+00     1.000e+00     1.250e-02     1.291e-01  
+    8         120    8.456786e+01     0.000e+00     1.000e+00     9.567e-03     2.927e+00  
+    9         128    8.456749e+01     0.000e+00     1.000e+00     5.932e-02     8.263e+00  
+   10         136    8.456548e+01     0.000e+00     1.000e+00     3.204e-01     1.786e+01  
+   11         144    8.455527e+01     0.000e+00     1.000e+00     1.650e+00     2.397e+01  
+   12         152    8.452839e+01     0.000e+00     1.000e+00     6.904e+00     1.622e+02  
+   13         160    8.451829e+01     0.000e+00     1.000e+00     4.118e-02     5.361e+01  
+   14         168    8.451691e+01     0.000e+00     1.000e+00     8.983e-03     1.892e+01  
+   15         176    8.451676e+01     0.000e+00     1.000e+00     6.715e-03     4.186e+00  
+   16         184    8.451675e+01     0.000e+00     1.000e+00     4.521e-03     1.914e-01  
+   17         192    8.451675e+01     0.000e+00     1.000e+00     8.480e-04     4.334e-02  
+   18         200    8.451675e+01     0.000e+00     1.000e+00     2.835e-05     3.481e-03  
+   19         208    8.451675e+01     0.000e+00     1.000e+00     2.580e-05     4.107e-03  
+   20         221    8.451675e+01     0.000e+00     1.681e-01     5.695e-07     3.539e-03  
+   21         252    8.451675e+01     0.000e+00     2.737e-04     1.484e-07     3.401e-03  
+   22         273    8.451675e+01     0.000e+00     5.585e-04     1.124e-09     3.401e-03  
+
+Local minimum possible. Constraints satisfied.
+
+fmincon stopped because the size of the current step is less than
+the value of the step size tolerance and constraints are 
+satisfied to within the value of the constraint tolerance.
+
+
+ start fitting TauDA 
+Running the local solvers in parallel.
+
+    Run       Local       Local      Local    Local   First-order
+   Index     exitflag      f(x)     # iter   F-count   optimality
+       2         3    2.015e-05        41       420       0.00158
+       3         3    2.057e-05        24       250     0.0007522
+       4         3    6.062e-06        33       340      0.001027
+       5         3        1.672         8        90     0.0001069
+       6         3     0.002722        16       170      0.002231
+       1         3    2.826e-05        35       360      0.005703
+       7         3    1.242e-06        27       280       0.01161
+       8         3    9.619e-07        52       530       0.01733
+       9         3     1.99e-05        36       370     0.0004707
+      11         3    1.942e-05        44       450      0.001816
+      12         3     0.004031        18       190       0.02222
+      13         3    1.681e-05        42       430     8.995e-05
+      14         3    2.359e-05        50       510      0.008565
+      15         3    2.157e-05        25       260     0.0001348
+      16         3    2.007e-05        40       410     0.0005688
+      17         3    1.546e-05        51       520     0.0003713
+      18         3        1.672        11       120      0.003307
+      19         3     0.002791        37       380       0.02135
+      20         3    2.874e-05        46       470      0.001304
+      30         3    2.537e-05        48       490       0.01317
+      29         3    0.0002595        24       250      0.001739
+      28         3     2.15e-05        48       490      0.008938
+      27         3    1.359e-06        24       250       0.01597
+      26         3        1.672        10       110      0.006441
+      35         3    1.461e-05        34       350      0.002661
+      34         3    2.717e-05        51       520      0.007939
+      33         3    2.115e-05        18       190      0.002784
+      32         3    0.0002466        21       220     0.0008039
+      31         3    1.573e-05        34       350     0.0002157
+      40         3     2.85e-05        64       650       0.01402
+      39         3    4.344e-06        32       330      0.003655
+      38         3    2.081e-06        40       410      0.004466
+      37         3    1.468e-06        52       530      0.003598
+      45         3     2.34e-05        29       300     0.0006089
+      44         3        1.672        11       120      0.001808
+      43         3     0.004585        32       330        0.1264
+      42         3    2.553e-05        30       310     7.243e-05
+      41         3    1.919e-05        28       290       0.01249
+      50         3    2.191e-05        42       430      0.001619
+      49         3     0.001774        13       140      0.003488
+      48         3    2.211e-05        73       740       0.00691
+      47         3    9.556e-05        33       340       0.01038
+      46         3    2.235e-05        40       410      0.000416
+      60         3     0.005222        23       240      0.003549
+      59         3    2.123e-05        46       470     0.0003733
+      58         3    7.924e-05        22       230     0.0004673
+      57         3    2.047e-05        37       380      0.006729
+      56         3    2.056e-05        41       420     0.0004632
+      10         3    3.024e-05        49       500      0.004689
+      25         3    1.111e-06        48       490      0.002507
+      24         3    2.398e-05        66       670       0.01592
+      23         3    2.504e-05        36       370      0.008937
+     126         3    0.0001218        37       380       0.01154
+     125         3    2.408e-05        28       290      0.006897
+      36         3    2.358e-05        29       300      0.002189
+     130         3    4.462e-05        16       170      0.002392
+     129         3    3.871e-05        30       310      0.009102
+     166         3        1.672         7        80      0.001416
+     171         3        1.672        10       110      0.001985
+     173         3        1.672        13       140      0.003529
+     124         3     2.72e-05        57       580       0.02359
+     123         3    2.187e-05        37       380      0.008316
+     161         3        1.672        13       140      0.001512
+     128         3    2.277e-05        36       370      0.001753
+     127         3    2.831e-05        24       250        0.0364
+      55         3    1.684e-06        27       280      0.002727
+      54         3    4.515e-05        21       220     2.012e-05
+      53         3    5.669e-05        31       320       0.01036
+      52         3    1.274e-06        21       220       0.02277
+      51         3    1.678e-06        58       590     0.0003784
+      70         3     1.65e-05        38       390      0.001722
+      69         3    0.0003153        48       490       0.00255
+      80         3    2.242e-05        38       390      0.005813
+      79         3    4.401e-06        52       530      0.002377
+      78         3    2.415e-05        31       320       0.01152
+      85         3    2.827e-06        31       320      0.003841
+      84         3    2.827e-05        31       320     6.406e-05
+      90         3    3.011e-05        52       530       0.03289
+      89         3    2.388e-05        34       350      0.003506
+      88         3    2.501e-05        39       400      0.006133
+      87         3    1.721e-05        41       420       0.01028
+      86         3    1.678e-05        51       520      0.002743
+      95         3    6.283e-05        23       240     6.403e-06
+      94         3    2.795e-05        61       620      0.002443
+     100         3    1.949e-05        25       260        0.0436
+      99         3     0.004844        26       270       0.01558
+     105         3    1.465e-05        25       260      0.006943
+     104         3    8.954e-07       105      1060     0.0009691
+     103         3      0.00122        31       320      0.006475
+     102         3        1.672        10       110     6.653e-05
+     101         3    2.018e-05        46       470      0.003583
+     110         3     3.97e-05        50       510      0.005576
+     109         3    9.896e-07        56       570     9.667e-05
+     108         3    6.299e-05        34       350      8.25e-05
+     107         3    1.588e-05        27       280      0.001081
+     106         3     0.002456        16       170       0.06789
+     115         3    1.751e-06        63       640      0.001834
+     114         3    8.943e-07        35       360      0.007839
+     113         3    1.435e-05        63       640     9.745e-05
+     112         3    8.127e-06        39       400      0.006951
+     111         3    1.866e-06        25       260      0.001558
+      22         3    2.163e-06        50       510      0.002409
+      21         3    4.815e-05        40       410     0.0006443
+     134         3     0.001386        25       260       0.01395
+     133         3     0.003687        16       170       0.04392
+     122         3    1.699e-05        18       190     0.0003289
+     121         3    1.599e-05        61       620     4.258e-05
+     164         3        1.672         7        80     0.0007807
+     190         3     5.43e-05        40       410      0.006082
+     162         3        1.672         8        90     0.0001293
+     179         3    2.638e-05        24       250      0.004644
+     180         3    2.616e-05        71       720      0.008175
+     185         3    5.745e-05        18       190     2.228e-06
+     174         3    4.812e-06        46       470      0.002289
+     176         3    2.483e-05        45       460      0.008863
+     188         3    4.447e-05        31       320        0.0086
+     167         3    2.947e-05        37       380      0.003502
+     169         3    2.846e-05        41       420       0.02564
+     182         3     2.72e-06        18       190       0.02961
+     192         3     5.71e-05        28       290     4.326e-06
+     199         3     1.99e-05        35       360      0.000119
+     163         3    1.242e-06        36       370      0.003346
+     172         3      0.00528        32       330      0.005489
+     187         3    2.101e-05        41       420     8.111e-06
+     196         3    1.534e-05        48       490     0.0005453
+     132         3    2.568e-05        54       550      0.006435
+     131         3    2.094e-05        56       570       0.01716
+     177         1        1.672         2        30     4.838e-07
+     191         3     2.31e-05        41       420      0.006061
+     198         3    2.879e-05        28       290       0.01014
+     140         3    0.0003384        45       460      0.009196
+     139         3    0.0005226        26       270      0.003142
+     165         3    2.096e-05        36       370      0.004141
+     181         3     0.001043        37       380      0.001652
+     200         3    2.556e-05        37       380      0.002387
+      65         3    2.389e-05        20       210       0.03739
+      64         3    0.0001247        32       330     0.0006895
+      63         3    1.903e-05        41       420      0.001207
+      62         3    1.574e-05        37       380     1.938e-05
+      61         3     8.61e-07        35       360     0.0006518
+     156         3    2.078e-05        28       290     0.0003719
+     155         3    1.716e-05        36       370      0.007029
+      68         3    3.018e-05        27       280       0.01111
+      67         3        2e-05        39       400     0.0007757
+      66         3     0.000152        29       300     0.0006767
+     158         3    5.903e-07        24       250      0.004153
+     157         3    2.032e-05        38       390      0.006176
+     195         3    6.067e-05        25       260      0.002635
+      75         3        1.672        12       130      0.003673
+      74         3    1.978e-06        40       410        0.0262
+      73         3    2.126e-05        42       430     0.0002164
+      72         3     1.72e-05        68       690     7.876e-05
+      71         3    2.615e-05        62       630      0.007778
+     160         3    2.474e-06        33       340      0.003713
+     159         3     0.000177        27       280      0.002027
+      77         3    1.966e-05        14       150      8.29e-05
+      76         3    8.849e-06        48       490       0.03227
+     150         3    1.041e-05        35       360       0.02508
+     149         3    1.931e-05        24       250      0.002013
+     183         3     0.002788        20       210      0.004958
+      83         3    1.742e-05        37       380     0.0007856
+      82         3    0.0002925        41       420      0.008909
+      81         3    2.243e-05        40       410     0.0009885
+     144         3    0.0002073        25       260      0.008999
+     143         3    2.707e-05        46       470       0.03981
+     146         3    1.916e-05        48       490      0.007698
+     145         3     0.003524        43       440      0.009697
+     178         3     0.001764        16       170      0.002751
+     197         3    2.032e-05        35       360     0.0004871
+      93         3    3.196e-05        55       560        0.0477
+      92         3    2.075e-05        32       330      0.006477
+      91         3     0.002893        23       240       0.01996
+     152         3     0.002562        41       420       0.02163
+     151         3    3.883e-06        41       420       0.05664
+     189         3    1.998e-05        28       290       0.00621
+      98         3    3.095e-06        50       510      0.004935
+      97         3    1.984e-05        35       360     0.0003466
+      96         3    0.0001902        41       420      0.001117
+     154         3    1.766e-06        36       370      0.008443
+     153         3    1.187e-06        24       250      0.003427
+     148         3     0.004979        26       270      0.007825
+     147         3        1.672        10       110     0.0002026
+     170         3    2.836e-05        48       490      0.002651
+     193         3    2.062e-06        43       440      0.001608
+     136         3    2.307e-05        39       400      0.007775
+     135         3        1.672         7        80       0.00309
+     175         3    1.287e-06        35       360       0.00237
+     184         3     0.001832        16       170      0.003038
+     194         3    2.459e-05        39       400      0.008197
+     142         3    0.0001779        50       510      0.008874
+     141         3    7.829e-06        30       310      0.007127
+     168         3    3.333e-06        57       580      0.004206
+     186         3    1.989e-05        38       390       0.00475
+     120         3        1.672         9       100      0.000606
+     119         3    3.921e-06        25       260      0.002628
+     118         3    2.249e-05        34       350     0.0009853
+     117         3    1.898e-05        73       740      0.004107
+     116         3    3.422e-05        26       270     0.0005946
+     138         3    9.692e-07        30       310     0.0009864
+     137         3    3.363e-05        67       680     3.471e-05
+
+MultiStart completed the runs from all start points.
+
+All 200 local solver runs converged with a positive local solver exit flag.
+
+ start fitting TauO 
+Running the local solvers in parallel.
+
+    Run       Local       Local      Local    Local   First-order
+   Index     exitflag      f(x)     # iter   F-count   optimality
+       1         3    1.067e-06        10        77      0.001242
+       2         3    6.096e-07        12        91      0.001035
+       3         3    1.179e-06        12        91     0.0004895
+       6         3    7.652e-07        12        91     0.0006219
+      25         3    0.0001678        12        91     0.0008565
+      24         3    0.0001679         9        70     0.0005943
+      23         3    7.615e-07        15       112     0.0002261
+      22         3     8.68e-07        18       133     0.0001982
+      21         3    5.177e-07        29       210      0.001809
+      30         3    6.273e-07        32       231     0.0003138
+      29         3    0.0001664        10        77     0.0009937
+      28         3    5.962e-07        21       154      0.000226
+      27         3    0.0001666        11        84     0.0006207
+      26         3    1.053e-06        32       231      0.001265
+     124         3    4.116e-07        32       231        0.0013
+     123         3    0.0001665        10        77     0.0001826
+      35         3    0.0001668        10        77     0.0003974
+      34         3     1.19e-06        25       182     0.0005002
+      33         3    5.791e-07        11        84      0.001025
+      32         3    0.0001354        16       119      0.001281
+      31         3    7.337e-07        17       126     0.0002559
+     126         3    0.0001679        10        77     5.007e-05
+     125         3    0.0001653         6        49     0.0003052
+       4         3    0.0001676        12        91     0.0004757
+      40         3    0.0001648         7        56      0.001114
+      39         3    0.0001677        12        91      0.001359
+      38         3    2.053e-06        24       175      0.003303
+      37         3    0.0001679         6        49     4.031e-05
+      36         3    0.0001056        12        91      0.001169
+     136         3    1.512e-06        12        91      0.000582
+     135         3    9.576e-07        22       161     0.0008035
+       5         3    0.0001556        16       119     0.0003802
+      45         3    0.0001572        13        98     0.0001633
+      44         3    0.0001664        10        77     0.0001687
+      43         3    0.0001669         6        49     0.0002127
+      42         3    0.0001679         9        70     0.0001483
+      41         3    0.0001678         8        63      0.001408
+     138         3    0.0001628        10        77     0.0009065
+     137         3    7.288e-07        26       189     0.0001198
+      50         3    0.0001678        13        98     0.0006483
+      49         3    0.0001679         8        63     0.0003576
+      48         3    5.814e-07        14       105     0.0006463
+      47         3    2.744e-06        14       105     3.595e-05
+      46         3    5.409e-07        23       168      0.001207
+       7         3    7.253e-07        16       119     3.896e-05
+      55         3     7.78e-07        21       154      0.001213
+      54         3    0.0001933         8        63      0.001671
+      53         3    0.0001656         8        63       0.00433
+      52         3    0.0001652        12        91      0.001587
+      51         3    0.0001669        10        77      3.07e-05
+       8         3    0.0001662        12        91     0.0008227
+      60         3    0.0001679        10        77      3.45e-05
+      59         3    1.165e-06        29       210     0.0008917
+      58         3    0.0001648        11        84     0.0009843
+      57         3    0.0001659        10        77      0.001605
+      56         3    0.0001661        13        98      0.001411
+     130         3     0.000167         9        70     0.0002289
+     129         3    0.0001678        10        77      0.001179
+       9         3    0.0001653        12        91      0.001514
+      65         3     7.79e-07        18       133      0.000626
+      64         3    9.682e-05        19       140        0.0014
+      63         3    0.0001679        10        77     4.006e-05
+      62         3    3.522e-07        32       231      0.001377
+      61         3    1.319e-06        11        84      0.001753
+      10         3    0.0001628        11        84      0.001176
+      70         3    0.0001544        14       105     0.0004146
+      69         3    3.741e-07        23       168     0.0003311
+      68         3    6.858e-07        17       126     0.0004252
+      67         3    7.874e-07        17       126     0.0001688
+      66         3    0.0001679         9        70     0.0002611
+      11         3    7.738e-07        21       154      0.000338
+      75         3    0.0001673        11        84      0.001444
+      74         3    6.121e-07        17       126     0.0004115
+      73         3    0.0001623        11        84     0.0008464
+      72         3    4.504e-07        22       161     0.0001271
+      71         3    1.129e-06        29       210      0.001315
+      12         3    3.771e-07        17       126     8.703e-05
+      80         3    0.0001677        12        91     0.0001723
+      79         3    1.015e-06        19       140      0.001183
+      78         3    6.101e-07        15       112     0.0004523
+      77         3    0.0001678        11        84     2.573e-05
+      76         3    0.0001678        10        77      7.12e-06
+      13         3    5.387e-07        13        98     0.0002253
+      14         3    0.0001498        16       119      0.000688
+      90         3    0.0001678        12        91     4.274e-05
+      89         3     0.000167         9        70     0.0007041
+      88         3    0.0001096        21       154      0.001292
+      87         3    1.366e-06        17       126     0.0006947
+      86         3    0.0001669         7        56     0.0001216
+      15         3    3.872e-07        26       189      0.002421
+      95         3    4.031e-07        30       217     0.0007382
+      94         3    9.598e-07        25       182      0.001351
+      93         3    7.567e-07        11        84      0.003309
+      92         3    0.0001678         8        63     0.0005371
+      91         3    0.0001654         9        70     0.0009535
+      16         3     9.13e-07        23       168     0.0002713
+     100         3    8.134e-07        26       189      0.001302
+      99         3    0.0001662        10        77      0.002755
+      98         3    0.0001679        11        84     0.0003466
+      97         3    5.531e-07        14       105     0.0002634
+      96         3    7.422e-07        18       133     9.208e-05
+      17         3     4.77e-07        16       119     0.0003391
+     105         3    0.0001679         9        70     0.0008732
+     104         3    7.286e-07        19       140      0.001332
+     103         3    9.488e-07        15       112     0.0007928
+     102         3    0.0001654         7        56      0.001273
+     101         3    7.416e-07        17       126     0.0003386
+      18         3    4.166e-07        15       112      0.000457
+     110         3    0.0001612        14       105      0.001133
+     109         3    8.129e-07        15       112     0.0005582
+     108         3    5.942e-07        13        98     0.0003953
+     107         3    0.0001613        11        84     2.818e-05
+     106         3    0.0001662        11        84     0.0007902
+      19         3    0.0001678        10        77     7.454e-05
+     115         3     4.58e-07        20       147     0.0004015
+     114         3    0.0001491        16       119     0.0006856
+     113         3    0.0001666         9        70     0.0001868
+     112         3    1.468e-06        14       105      0.001251
+     111         3    6.042e-07        22       161     0.0003454
+      20         3    0.0001578        12        91     0.0002359
+     122         3    5.555e-07        21       154     0.0001064
+     121         3    0.0001667         7        56        0.0014
+     176         3    0.0001664        11        84      0.001122
+     184         3    0.0001668         9        70      0.001277
+     167         3    8.428e-07        22       161       0.00171
+     177         3    8.183e-07        30       217      0.001034
+     163         3    5.274e-07        30       217     1.564e-05
+     180         3    0.0001679         8        63     6.556e-06
+     190         3    1.009e-06        26       189      3.75e-05
+     197         3     1.79e-06        24       175     8.443e-05
+     164         3    5.108e-07        24       175      0.001149
+     172         3    0.0001656        11        84      0.001268
+     161         3    0.0001586        14       105      0.001198
+     181         3    8.929e-07        31       224      0.001292
+     186         3    5.583e-07        17       126     0.0002577
+     200         3    4.967e-07        12        91     0.0002442
+     128         3    6.503e-07        27       196      0.001466
+     127         3    1.212e-06        12        91      0.001875
+     168         3    1.178e-06        19       140     0.0001064
+     198         3    0.0001664         9        70      0.001335
+     142         3    1.645e-06        10        77      0.000978
+     141         3    6.618e-07        34       245     7.169e-05
+     165         3    6.064e-07        14       105     0.0001823
+     166         3    7.037e-07        16       119     1.421e-05
+     183         3    0.0001679         7        56     3.922e-05
+     188         3      5.6e-07        11        84     0.0004496
+     196         3    1.304e-06         7        56      0.001068
+     140         3    1.233e-06         8        63      0.004027
+     139         3    5.775e-07        13        98     0.0002359
+     175         3     6.42e-07        28       203      0.003232
+     132         3    9.612e-07        18       133     0.0001847
+     131         3    9.254e-07        22       161     0.0006492
+     170         3    4.616e-07        18       133     0.0001735
+     156         3    1.377e-06        14       105     0.0002369
+     155         3     6.72e-07        10        77     0.0006962
+     174         3    0.0001679        13        98     0.0007028
+     193         3    8.683e-07        25       182     0.0006048
+     148         3    4.209e-07        18       133     0.0003094
+     147         3    6.662e-07        14       105     0.0001231
+     171         3    6.379e-07        26       189        0.0012
+     194         3    6.389e-07        14       105     0.0005098
+      85         3    1.033e-06        11        84     2.544e-06
+      84         3    0.0001269        14       105     0.0009785
+      83         3    0.0001622        11        84      0.001228
+      82         3    0.0001245        25       182      0.001305
+      81         3    0.0001665        10        77      0.001751
+     150         3    1.807e-06        14       105      0.001025
+     149         3    0.0001673        13        98      0.001201
+     144         3    0.0001547        14       105     0.0002736
+     143         3    0.0001467        15       112     0.0003309
+     169         3    4.343e-07        18       133     0.0005929
+     189         3    0.0001665        11        84      0.001231
+     199         3    8.942e-07        18       133     0.0004127
+     160         3    0.0001679         9        70     0.0001611
+     159         3    0.0001651        11        84     0.0009958
+     182         3    6.068e-07        14       105     0.0005338
+     191         3    4.573e-07        25       182      0.002556
+     158         1    1.144e-06        15       112       6.2e-07
+     157         3    5.411e-07        10        77     0.0009443
+     179         3    5.144e-07        28       203      0.001765
+     154         1    0.0001938         2        21             0
+     153         3    4.297e-07        27       196     0.0004185
+     178         3    0.0001679        10        77     0.0002983
+     146         3    4.686e-07        17       126     0.0001221
+     145         3    1.091e-06        25       182     0.0002981
+     162         3    0.0001535        10        77      0.001545
+     185         3    0.0001672         9        70     0.0006187
+     187         3    0.0001679        11        84     0.0005391
+     195         3     7.89e-07        24       175     0.0006905
+     134         3     0.000167         9        70     0.0001356
+     133         3    1.008e-06        17       126     0.0003189
+     173         3    5.448e-07        16       119      0.000379
+     120         3    9.702e-07        22       161      0.001127
+     119         3    2.697e-06         8        63      0.000439
+     118         3    0.0001677        13        98     0.0003627
+     117         3    6.837e-07        23       168     0.0002534
+     116         3    0.0001668        14       105       0.00075
+     152         3    1.121e-06        20       147      2.09e-05
+     151         3    5.125e-07        19       140     0.0002117
+     192         3    7.961e-07        23       168      0.001953
+
+MultiStart completed the runs from all start points.
+
+All 200 local solver runs converged with a positive local solver exit flag.
+Warning: run ode off always
+> In fit22HH (line 404)
+  In runfit22HH_LIS (line 52)
+
+ final optimization 
+
+ selected functions: OinfI = symLogisticslog 
+
+ selected functions: TauOI = symLogisticsloginv 
+
+ selected functions: IinfI = symLogisticslogmina 
+
+ selected functions: TauII = doublesymLogisticslogmina 
+
+ selected functions: TauOV = Logistics 
+
+ selected functions: TauIV = Logistics 
+
+ selected functions: Grect = GHH 
+
+ selected functions: combTauO = @(funV,funI)funV.*funI 
+
+ selected functions: combTauDA = @(funV,funI)funV.*funI 
+start ga finalopt
+
+                              Best       Max        Stall
+Generation  Func-count        f(x)     Constraint  Generations
+    1          11660       1.90879            0      0
+    2          23100       1.90264            0      0
+    3          45320       1.88996            0      0
+    4          67540       1.87992            0      0
+    5          89760       1.73456            0      0
+Optimization terminated: average change in the fitness value less than options.FunctionTolerance
+ and constraint violation is less than options.ConstraintTolerance.
+Switching to the hybrid optimization algorithm (FMINCON).
+ Iter  Func-count            Fval   Feasibility   Step Length       Norm of   First-order  
+                                                                       step    optimality
+    0          23    1.734561e+00     0.000e+00     1.000e+00     0.000e+00     2.443e+01  
+    1          86    1.734561e+00     0.000e+00     6.367e-07     3.280e-06     9.952e+01  
+    2         169    1.734561e+00     0.000e+00     5.080e-10     4.971e-09     9.240e+01  
+    3         236    1.734561e+00     0.000e+00     4.184e-11     2.959e-10     9.240e+01  
+
+Local minimum possible. Constraints satisfied.
+
+fmincon stopped because the size of the current step is less than
+the value of the step size tolerance and constraints are 
+satisfied to within the value of the constraint tolerance.
+
+FMINCON terminated.

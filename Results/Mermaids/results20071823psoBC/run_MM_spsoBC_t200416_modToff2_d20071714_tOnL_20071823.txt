@@ -1,0 +1,91 @@
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 20).
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,V)p(1)./(1+exp(-(V-p(2))./p(3)))+p(4)
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,V)p(1)./(1+exp(-(V-p(2))./p(3)))+p(4)
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,Il)(p(3)./(p(1).*Il.^(1./(p(2)*log(10)))+1))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,Il)(p(3)./(p(1).*Il.^(1./(p(2)*log(10)))+1))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,I)(1./(1+p(1).*I.^(-1./(p(2)*log(10)))))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,I)1-(p(3)./(1+p(1).*I.^(-1./(p(2)*log(10)))))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,V)p(1)*(V-p(2))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(p,I)1-(p(3)./(1+exp(p(1)/p(2)).*I.^(-1./(p(2)*log(10)))))
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(funV,funI)funV.*funI
+> In runfit22HH_LIS (line 47)
+Warning: Could not find appropriate function on path loading function handle D:\users\rschoeters\Documents\Optogenetics\matlab\Fit tool\run22fitMM.m>@(funV,funI)funV.*funI
+> In runfit22HH_LIS (line 47)
+
+ all target values are included in tau rec 
+
+ new fields added at lv2 1: w, wtr 
+
+ new fields added at lvl3 : TimeLimit 
+
+ new fields added at lvl3 : TimeLimit 
+
+flags
+------
+chekcDoubleflag: true
+errorbarflag: true 
+HPC flag; false
+plotflag: true 
+plot features: true
+plot Tau: true
+sortflag: true 
+memorySave flag: false
+timeflag: true 
+include TauRecovery data: true
+plot Tau Recov as well: true 
+Outfun plot flag: false 
+inlcude tau Recov in final optimization: true 
+include Iratio in goda: false 
+correct TauDA0 not being equal to Taurec: true 
+
+ adj_flags
+---------
+adj Fields recal options FB IV dependence: false
+adj Fields options TauO: true
+adj Fields options TauDA: true
+adj Fields options G Oinf DAin: true
+adj Fields options final optimisation: true
+
+ fit options
+----------
+maximum iterations: 1.00e+06
+maximum time: 2.88e+04
+maximum function evaluations: 1.00e+06
+Start points ms: all
+function tolerance: 1.00e-10
+X tolerance: 1.00e-10
+nr multistart recal options FBIVdepend TauO: 20
+nr multistart recal options FBIVdepend TauDA: 20
+nr multistart options TauO: 200
+nr multistart options TauDA: 200
+nr multistart options G Oinf DAin: 300
+nr multistart final optimization FB ms: 700
+nr multistart final optimization FB TauRecov estimation: 20
+
+Methods and inputs
+----------
+power a: 1 
+power b: 1 
+featurenames included: Ipeak Iss Imean Iratio Imean TauOn TauOff TauInact ttp I
+Taurecovery featnames: TauRecov
+Target type IVdependencies: features
+fit Order: GODA-tDA-tO
+solver method TauO: lsqcurvefit
+solver method TauDA: lsqcurvefit
+Options LB UB scaling: frac_initb
+Ode Options: RelTol = 1.00e-08
+Ode Options: AbsTol = 1.00e-08
+Ode Options: Maxstep = 1.00e-04
+weights G Oinf DAinf: input
+Solver Method GODA: psoBC
+final optimization selection: all
+final optimization
