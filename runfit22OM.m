@@ -62,7 +62,7 @@ solverMethod = solverMethods{is};
 %changes to flags
 
 %changes to standard Input fit
-figpos = [60,187,1791,757];
+%figpos = [60,187,1791,757];
 powera = 1;
 powerb = 1;
 settings = horzcat(settings,{'powera',powera,'powerb',powerb,'figpos',figpos});
@@ -197,8 +197,6 @@ if test_flag
     suffix_ex = [suffix_ex,'_test'];
 end
 
-% (out)comment below what you want to do. Currently only input file
-% created fit is not started
 
 Savename = fullfile('./Inputs/H134Rexp/',sprintf('H134R_s%s_t%s_d%s%s.mat',solverMethod,nr,datestr(now,'yymmddHH'),suffix_ex));
 switch saveorrun
