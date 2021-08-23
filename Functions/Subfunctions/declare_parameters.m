@@ -107,9 +107,9 @@ options_TauDA.msopt = {'Display',DisplayIter,'UseParallel',useParallel,'Function
 % options fitGODA
 wGODA.type = 'sd';          %'sd', 'input', 'equal','rel'
 wGODA.w = 1;
-options_GODA.I_nonlcon = [logspace(0,4,5)];
-options_GODA.V1_nonlcon = [10,20,40];
-options_GODA.V2_nonlcon = [-80,-60,-40,-20,-10];
+options_GODA.I_nonlcon = []; %e.g., logspace(0,4,5)
+options_GODA.V1_nonlcon = []; % e.g., [10,20,40]
+options_GODA.V2_nonlcon = []; %e.g,[-80,-60,-40,-20,-10]
 options_GODA.extrac_nonlcon.IO_smaller_flag = 0;
 options_GODA.extrac_nonlcon.IO_smaller = [];
 options_GODA.extrac_nonlcon.Olim_smaller = [];
@@ -190,9 +190,9 @@ options_fopt.FB.dxx    = 1e-3; %1ms
 options_fopt.FB.dt = 1e-4; %1ms
 options_fopt.FB.nrr_featextr = 20;
 options_fopt.FB.plot_featextr = 0;
-options_fopt.I_nonlcon = [logspace(0,4,5)];
-options_fopt.V1_nonlcon = [10,20,40];
-options_fopt.V2_nonlcon = [-80,-60,-40,-20,-10];
+options_fopt.I_nonlcon = []; %[logspace(0,4,5)]
+options_fopt.V1_nonlcon = []; %[10,20,40]
+options_fopt.V2_nonlcon = []; %[-80,-60,-40,-20,-10]
 options_fopt.extrac_nonlcon.IO_smaller_flag = 0;
 options_fopt.extrac_nonlcon.IO_smaller = [];
 options_fopt.extrac_nonlcon.Olim_smaller = [];
@@ -263,7 +263,7 @@ options_fopt.hybfun = 'fmincon';
 % figures
 Colors = [0, 0.4470, 0.7410; 0.8500, 0.3250, 0.0980; 0.9290, 0.6940, 0.1250; 0.4940, 0.1840, 0.5560; 0.4660, 0.6740, 0.1880; 0.3010, 0.7450, 0.9330; 0.6350, 0.0780, 0.1840; 1 ,0 ,0; 0, 1, 0; 0, 0, 1];
 type = {'-','o-','--','-.','-*'};
-fig_pos = [-1603,206,1404,727];
+%fig_pos = [-1603,206,1404,727];
 
 
 % Change standard input parameters

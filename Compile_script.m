@@ -4,9 +4,7 @@
 %License is necessary prior compilation
 
 %paths below schould be adjusted according to own system and folders
-rmpath(genpath('D:\Users\rschoeters\Documents\MATLAB\Interestingfunctions'));  % remove all loaded functions from path
-addpath('D:\Users\rschoeters\Documents\MATLAB\Interestingfunctions'); %functions included are mtit, colormaps (normally not necessary for tool)
-addpath('D:\Users\rschoeters\Documents\MATLAB\Interestingfunctions\PSO_BC');% necessary Particle Swarm optimization with boundary conditions
+addpath('$user\PSO_BC');% necessary Particle Swarm optimization with boundary conditions
 
 
 % -I includes folder path and compiles matlab functions within, does not

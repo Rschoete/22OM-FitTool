@@ -236,14 +236,7 @@ switch lower(IVdepend_targets)
         [xdata,ydata,IlTau_val,options_GODA] = genXYFB(Target_sp,Vm_valsp,Il_valsp,Target_tr,Vm_valtr,Il_valtr,wGODA,options_GODA,...
             powera,powerb,recal_opt_FBIVdepend,TauRecov_flag,inclIratio_flag,corrTauDAIl0_flag);
         OinfDAinf_flag = 0;
-    case 'currenttraces'
 
-        error('not encoded')
-        OinfDAinf_flag = 1;
-    case 'postcurrenttraces'
-        error('not encoded')
-        data = load(['./Target/',filename]);
-        OinfDAinf_flag = 1;
     otherwise
         error('invalid input fit Method')
 end
