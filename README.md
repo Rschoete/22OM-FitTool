@@ -19,7 +19,7 @@ The master function of the fitting procedure. It requires an Input structure whi
 
 Important is the Target structure which should at least contain a SingleP field (Target.SingleP, single pulse experiments). If data of two pulse experiments is available, Target.TauRecov can be added as well. The features are stored as follows:![targetSingleP](readmefigs/targetSingleP_exmpl.png)
 
-Standard deviations (e.g., Ipeak_SD) are not mandatory. Usage depends on selected cost-function method. Preferably, Vm (voltage clamp value) is in mV, Il in W/m2, time constants in seconds as well as pulse start and duration (OSpstart, OSpd with OSp = optical stimulation pulse). Units of current features (Ipeak, Iss) is free of choice (but the same for all) but the range of gChR2 should be chosen accordingly. The above mentioned units are prefered, however not mandatory. The reason whi is because the starting points, lower and upper bounds in the **load_functionDB** are based on these units. If data is available on TauRecov: it should be stored as follows:![targetTauRecov](readmefigs/targetTauRecov_exmpl.png)
+Standard deviations (e.g., Ipeak_SD) are not mandatory. Usage depends on selected cost-function method. Preferably, Vm (voltage clamp value) is in mV, Il in W/m2, time constants in seconds as well as pulse start and duration (OSpstart, OSpd with OSp = optical stimulation pulse). Units of current features (Ipeak, Iss) is free of choice (but the same for all) but the range of gChR2 should be chosen accordingly. The above mentioned units are prefered, however not mandatory. The reason whi is because the starting points, lower and upper bounds in the **load_functionDB** are based on these units. If data is available on TauRecov: it should be stored as follows: ![targetTauRecov](readmefigs/targetTauRecov_exmpl.png)
 
 After loading the target data. The hyperparameters are determined through the **declare_parameter** function. Changes given via settings/varargin are made accordingly. Depending on chosen options, some checkups are performed prior start of fit. Next, doubles in target file are combined and the target file is sorted (sort is not mandatory but improves plot quality). Next the relationships can be plotted via **plotFeature**.
 
@@ -56,6 +56,8 @@ Rescale taurecov obtained by model with power b (if DA or R(in paper) is raised 
 
 17. **Outfun and stopPSO**:
 Functions to stop the particle swarm optimization algorithm when stuck in singularity.
+
+18. **collDATA_fittool**: Function that calculates current traces for stimulation parameters defined in target file and model parameters obtained after fit22HH. Usefull to visualize results after fit is performed
 
 ## Bounded particle swarm optimization
 PSObc uses a bounded particle swarm optimization which is not standard builtin to matlab. PSObc can be downloaded from matlabcentral. Just add to path
