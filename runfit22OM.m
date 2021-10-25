@@ -4,7 +4,8 @@ clear all
 clc
 
 test_flag = 1; % when active reduces time limits and number of particles and or starting points
-saveorrun = 'save';  % save: Save settings below to input or start: start fit procedure
+saveorrun = 'run';  % save: Save settings below to input or start: start fit procedure
+runODE_flag = 0;
 
 % Example target H134R
 nr= '200414';
@@ -65,7 +66,8 @@ solverMethod = solverMethods{is};
 %figpos = [60,187,1791,757];
 powera = 1;
 powerb = 1;
-settings = horzcat(settings,{'powera',powera,'powerb',powerb,'figpos',figpos});
+ssReached_flag = 1;
+settings = horzcat(settings,{'powera',powera,'powerb',powerb,'runODE_flag',runODE_flag,'ssReached_flag',ssReached_flag});
 
 % changes standard optimization otpions
 if test_flag
@@ -73,7 +75,7 @@ if test_flag
 else
     maxIter = 1e6;
 end
-maxTime = Timelim(iTl);%24*3600;
+maxTime = Timelim(iTl);
 DisplayIter = 'iter';
 StartPointsToRun = 'all';
 OdeOpts = {'RelTol',1e-8,'AbsTol',1e-8,'Maxstep',100e-6};
@@ -99,7 +101,7 @@ options_GODA.dt = 1.5e-4;
 
 options_GODA.solverMethod ='ms';
 if test_flag
-    options_GODA.msnr = 100;
+    options_GODA.msnr = 30;
 else
     options_GODA.msnr = 3000;
 end
@@ -158,11 +160,13 @@ options_fopt.extrac_nonlcon.IO_bigger = 5500;
 options_fopt.FB.method_tr = 'currenttraces';
 
 if test_flag
-    options_fopt.psoBC.options.Generations = 10;
+    options_fopt.psoBC.options.Generations = 2;
+    options_fopt.psoBC.options.PopulationSize = 10;
+    options_fopt.hybridopt.MaxIter = 10
+    options_fopt.hyboptions.MaxFunEvals = 100
 else
     options_fopt.psoBC.options.Generations = 1000;
 end
-%options_fopt.psoBC.options.PopulationSize = 10;       %default is 10*nvars
 %options_fopt.psoBC.options.PlotFcns = {@psoplotbestf}%,@psoplotswarmsurf} ;
 options_fopt.psoBC.options.TimeLimit = maxTime;
 
@@ -171,7 +175,6 @@ if test_flag
 else
     options_fopt.ga.options.Generations = 1000;
 end
-%options_fopt.ga.options.PopulationSize = 700;      %default is 10*nvars
 %options_fopt.ga.options.PlotFcns = {@gaplotbestf,@gaplotstopping};
 options_fopt.ga.options.TimeLimit = maxTime;
 

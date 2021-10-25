@@ -1,4 +1,4 @@
-function [checkDouble_flag,display_flag,errorbar_flag,memorySave_flag,plotFeat_flag,plotTau_flag,plot_flag,plotTauRecov_flag,...
+function [checkDouble_flag,display_flag,errorbar_flag,memorySave_flag,plotFeat_flag,plotTau_flag,plot_flag,runODE_flag,plotTauRecov_flag,...
     TauRecov_flag,sort_flag,time_flag,inclIratio_flag,corrTauDAIl0_flag,powera,powerb,OdeOpts,featNames,featNames_SD,featNamesTr,featNamesTr_SD,...
     featNamesT_plot,featNamesI_plot,IVdepend_targets,recal_opt_FBIVdepend,fitOrder,options_TauO,options_TauDA,...
     wGODA,options_GODA,fopt_select,fopt_objMethod,fopt_solverMethod,options_fopt,Colors,type,fig_pos] =...
@@ -8,7 +8,9 @@ tf_string = {'false','true'};
 % default settings
 useParallel = 1; %'off', 'always'
 StartPointsToRun = 'all'; %'bounds','bounds-ineqs'
+fig_pos = [264, 343, 1172, 635];
 % flags
+ssReached_flag = 1; % is steady state reached at end of first pulse? if false extract steady state value during exponential fit in Extract_feat. Note: in intermediate step the pulse end value will be assigned as steady state! Inclusion of mono exponential fit is possible in intermetdiat step but would be at tremendous computational time cost 
 checkDouble_flag = 1;
 display_flag = 1;
 errorbar_flag = 1;
@@ -18,6 +20,7 @@ plotTauRecov_flag = 1;
 plotFeat_flag = 1;
 plotTau_flag = 1;
 plot_flag = 1;
+runODE_flag = 1;
 memorySave_flag = 0;
 sort_flag = 1;
 time_flag = 1;
@@ -179,7 +182,7 @@ options_fopt.CT.obj = 'rms';                %rms or q2
 %   options_fopt.CT.w
 %   options_fopt.CT.wtr
 
-options_fopt.FB.method_tr = 'currenttraces';        %estimpowerb','noestimpowerb',currenttraces' (first to tend to underestimate if Iratio >0
+options_fopt.FB.method_tr = 'currenttraces';        %estimpowerb','noestimpowerb',currenttraces','currenttraces_otherdef' (first tend to underestimate if Iratio >0, last method uses new definition for TauRecovery. Use this one when steady state value does not drop below 63% of peak value
 options_fopt.FB.trestim.optimoptions = {'lsqcurvefit','Algorithm','trust-region-reflective',...
     'MaxFunctionEvaluations',maxFunEval,'MaxIterations',maxIter};
 options_fopt.FB.trestim.msopt = {'Display',DisplayIter,'UseParallel',useParallel,'FunctionTolerance',funTol,'XTolerance',XTol,'MaxTime',maxTime,'StartPointsToRun',StartPointsToRun};
@@ -189,6 +192,9 @@ options_fopt.FB.dt_tr = 1e-3;  %1ms
 options_fopt.FB.dxx    = 1e-3; %1ms
 options_fopt.FB.dt = 1e-4; %1ms
 options_fopt.FB.nrr_featextr = 20;
+options_fopt.FB.ssReached_flag = ssReached_flag; %parameters used in Extract_feat (see extract_feat for more info)
+options_fopt.FB.segTauInact_startpoint = 0.005;
+options_fopt.FB.feat_extr_settings = {} %possibility to add more settings See Extrac feat. but should be given as key value pair in list format
 options_fopt.FB.plot_featextr = 0;
 options_fopt.I_nonlcon = []; %[logspace(0,4,5)]
 options_fopt.V1_nonlcon = []; %[10,20,40]
@@ -240,7 +246,7 @@ options_fopt.hyboptions.FunctionTolerance = funTol;
 options_fopt.hyboptions.OptimalityTolerance = funTol;
 options_fopt.hyboptions.StepTolerance = XTol;
 options_fopt.hyboptions.XTolerance = XTol;
-options_fopt.hyboptions.MaxFunctionEvaluations = maxFunEval;
+options_fopt.hyboptions.MaxFunEvals = maxFunEval;
 options_fopt.hyboptions.MaxIterations = maxIter;
 options_fopt.hyboptions.Algorithm = 'sqp';
 options_fopt.hybfun = 'fmincon';
@@ -303,6 +309,9 @@ if mod(length(varargin)+1,2)
         end
         if any(strcmpi(varargin,'checkDouble'))
             checkDouble_flag = varargin{find(strcmpi(varargin,'checkDouble'))+1};
+        end
+        if any(strcmpi(varargin,'ssReached_flag'))
+            ssReached_flag = varargin{find(strcmpi(varargin,'ssReached_flag'))+1};
         end
         if any(strcmpi(varargin,'Colors'))
             Colors = varargin{find(strcmpi(varargin,'Colors'))+1};
@@ -413,6 +422,9 @@ if mod(length(varargin)+1,2)
             recal_opt_input = varargin{find(strcmpi(varargin,'recal_opt_FBIVdepend'))+1};
             adjFields_roptFBIV_flag = 1;
         end
+        if any(strcmpi(varargin,'runODE_flag'))
+            runODE_flag = varargin{find(strcmpi(varargin,'runODE_flag'))+1};
+        end
         if any(strcmpi(varargin,'Sort'))
             sort_flag = varargin{find(strcmpi(varargin,'Sort'))+1};
         end
@@ -513,7 +525,9 @@ if adjFields_optGODA_flag
 end
 if adjFields_optfopt_flag
     options_fopt = adjFields(options_fopt,options_fopt_input,3);
+    options_fopt.FB.ssReached_flag = ssReached_flag;
 end
+
 
 if strcmpi(options_GODA.solverMethod,'psoBC')
     hybridopt = optimoptions(options_GODA.hybfun);
@@ -605,6 +619,7 @@ if display_flag
     fprintf('plot features: %s\n',tf_string{plotFeat_flag+1});
     fprintf('plot Tau: %s\n',tf_string{plotTau_flag+1});
     fprintf('sortflag: %s \n',tf_string{sort_flag+1});
+    fprintf('Steady state reached in dataset: %s \n',tf_string{ssReached_flag+1});
     fprintf('memorySave flag: %s\n',tf_string{memorySave_flag+1});
     fprintf('timeflag: %s \n',tf_string{time_flag+1});
     fprintf('include TauRecovery data: %s\n',tf_string{TauRecov_flag+1})
@@ -758,6 +773,11 @@ elseif strcmpi(fopt_objMethod,'features')
                 error('no interval field')
                 end
             end
+        end
+        if corrTauDAIl0_flag && strcmpi(options_fopt.FB.method_tr,'currenttraces_otherdef')
+            warning('!Mismatch between intermediate and final step!\n: Definitions used for tau_recov do not match. Correction in intermediate step because corrTauDAIl0_flag is True but in final step other definition is used where correction is not required')
+            warning('adjusting corrTauDAIl0_flag to false')
+            corrTauDAIl0_flag = 0;
         end
     end
 else
