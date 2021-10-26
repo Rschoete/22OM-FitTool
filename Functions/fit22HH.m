@@ -48,7 +48,7 @@ else
     fprintf('\n all target values are included in tau rec \n')
 end
 
-[checkDouble_flag,display_flag,errorbar_flag,memorySave_flag,plotFeat_flag,plotTau_flag,plot_flag,plotTauRecov_flag,...
+[checkDouble_flag,display_flag,errorbar_flag,memorySave_flag,plotFeat_flag,plotTau_flag,plot_flag,runODE_flag,plotTauRecov_flag,...
     TauRecov_flag,sort_flag,time_flag,inclIratio_flag,corrTauDAIl0_flag,powera,powerb,OdeOpts,featNames,featNames_SD,featNamesTr,featNamesTr_SD,...
     featNamesT_plot,featNamesI_plot,IVdepend_targets,recal_opt_FBIVdepend,fitOrder,options_TauO,options_TauDA,...
     wGODA,options_GODA,fopt_select,fopt_objMethod,fopt_solverMethod,options_fopt,Colors,type,fig_pos] =...
@@ -383,7 +383,7 @@ switch fitOrder
 end
 % run ODE
 %warning('run ode off always')
-if plot_flag
+if plot_flag && runODE_flag
     %time consuming
     runODE(Vm_valsp,Target_sp,OdeOpts,fun_Best,powera,powerb,Colors,plotTauRecov_flag,Vm_valtr,Target_tr)
 end
@@ -404,7 +404,7 @@ end
     display_flag,plot_flag,plotTauRecov_flag,TauRecov_flag,Colors,memorySave_flag);
 Out.(fopt_select) = Out_final.(fopt_select);
 
-if plot_flag
+if plot_flag && runODE_flag
     runODE(Vm_valsp,Target_sp,OdeOpts,funfopt_Best,powera,powerb,Colors,plotTauRecov_flag,Vm_valtr,Target_tr)
 end
 if time_flag

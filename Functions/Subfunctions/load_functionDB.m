@@ -28,7 +28,7 @@ end
 
 % Il=0 => 0 Il=inf  => 1  bend at 10^p(1) slope at bend =  1/(4*p(2))/dec
 fun.symLogisticslog.fun=@(p,I) (1./(1+exp(p(1)./p(2)).*I.^(-1./(p(2)*log(10)))));
-fun.symLogisticslog.LB=[-10 0];
+fun.symLogisticslog.LB=[-10 1e-2];
 fun.symLogisticslog.X0=[1,1];
 fun.symLogisticslog.UB=[10,20];
 fun.symLogisticslog.nrpara=2;
@@ -36,7 +36,7 @@ fun.symLogisticslog.var=2;
 
 % Il=0 => 0 Il=inf  => p(3) bend at 10^p(1) slope at bend =  p(3)/(4*p(2))/dec
 fun.symLogisticsloga.fun=@(p,I) (p(3)./(1+exp(p(1)./p(2)).*I.^(-1./(p(2)*log(10)))));
-fun.symLogisticsloga.LB=[-10,0,0];
+fun.symLogisticsloga.LB=[-10,1e-2,0];
 fun.symLogisticsloga.X0=[1,1,1];
 fun.symLogisticsloga.UB=[10,20,100];
 fun.symLogisticsloga.nrpara=3;
@@ -44,7 +44,7 @@ fun.symLogisticsloga.var=2;
 
 % Il=0 => 1 Il=inf  =>1-p(3) bend at 10^p(1) slope at bend =  -p(3)/(4*p(2))/dec
 fun.symLogisticslogmina.fun=@(p,I) 1-(p(3)./(1+exp(p(1)/p(2)).*I.^(-1./(p(2)*log(10)))));
-fun.symLogisticslogmina.LB=[-10,0,0];
+fun.symLogisticslogmina.LB=[-10,1e-2,0];
 fun.symLogisticslogmina.X0=[1,1,0.1];
 fun.symLogisticslogmina.UB=[10,20,1];
 fun.symLogisticslogmina.nrpara=3;
@@ -93,7 +93,7 @@ fun.logpolynomial3.var=2;
 % Il=0 => p(3) Il=inf  =>0 bend at 10^p(1) slope at bend =  -p(3)/(4*p(2))/dec
 fun.symLogisticsloginv.fun=@(p,I) (p(3)./(exp(-p(1)/p(2)).*I.^(1./(p(2)*log(10)))+1));
 fun.symLogisticsloginv.nrpara=3;
-fun.symLogisticsloginv.LB=[-10,0,0];
+fun.symLogisticsloginv.LB=[-10,1e-2,0];
 fun.symLogisticsloginv.X0=[1,1,0.5];
 fun.symLogisticsloginv.UB=[10,20,1];
 fun.symLogisticsloginv.var=2;
@@ -104,7 +104,7 @@ fun.doublesymLogisticslogmina.fun =...
     @(p,I) p(1).*(1-p(2)./(1+exp(p(3)./p(4)).*I.^(-1./(p(4)*log(10))))-(1-p(2))./(1+exp(p(5)./p(6)).*I.^(-1./(p(6)*log(10)))));
     %@(p,Il)  p(1).*(1-p(2)./(1+exp(-(log10(Il)-p(3))/(p(4))))-(1-p(2))./(1+exp(-(log10(Il)-p(5))/p(6))));
 fun.doublesymLogisticslogmina.nrpara = 6;
-fun.doublesymLogisticslogmina.LB = [0,0,-10,0,-10,0];
+fun.doublesymLogisticslogmina.LB = [0,0,-10,1e-2,-10,1e-2];
 fun.doublesymLogisticslogmina.X0 = [1,0.5,0,1/8,3,1/2];%  first bend at Il = 1 & -1/dec second bend at  Il = 1000 -1/4/dec
 fun.doublesymLogisticslogmina.UB = [10,1,10,20,10,20];
 fun.doublesymLogisticslogmina.var = 2; % function for Il or V or both
@@ -115,7 +115,7 @@ fun.doublesymLogisticslogmina7.fun =...
     @(p,I) p(1).*(1-p(2)./(1+exp(p(3)./p(4)).*I.^(-1./(p(4)*log(10))))-(1-p(2))./(1+exp(p(5)./p(6)).*I.^(-1./(p(6)*log(10)))))+p(7);
     %@(p,Il)  p(1).*(1-p(2)./(1+exp(-(log10(Il)-p(3))/(p(4))))-(1-p(2))./(1+exp(-(log10(Il)-p(5))/p(6))));
 fun.doublesymLogisticslogmina7.nrpara = 7;
-fun.doublesymLogisticslogmina7.LB = [0,0,-10,0,-10,0,0];
+fun.doublesymLogisticslogmina7.LB = [0,0,-10,1e-2,-10,1e-2,0];
 fun.doublesymLogisticslogmina7.X0 = [1,0.5,0,1/8,3,1/2,0];%  first bend at Il = 1 & -1/dec second bend at  Il = 1000 -1/4/dec
 fun.doublesymLogisticslogmina7.UB = [10,1,10,20,10,20,1];
 fun.doublesymLogisticslogmina7.var = 2; % function for Il or V or both
@@ -123,7 +123,7 @@ fun.doublesymLogisticslogmina7.var = 2; % function for Il or V or both
 % Il=0 => p(3)+p(4) Il=inf  =>0 bend at 10^p(1) slope at bend =  -p(3)/(4*p(2))/dec
 fun.symLogisticsloginvd0.fun=@(p,I) (p(3)./(exp(-p(1)/p(2)).*I.^(1./(p(2)*log(10)))+1))+double(I==0)*p(4);
 fun.symLogisticsloginvd0.nrpara=4;
-fun.symLogisticsloginvd0.LB=[-10,0,0,0];
+fun.symLogisticsloginvd0.LB=[-10,1e-2,0,0];
 fun.symLogisticsloginvd0.X0=[1,1,0.5,0];
 fun.symLogisticsloginvd0.UB=[10,20,1,10];
 fun.symLogisticsloginvd0.var=2;
@@ -131,14 +131,14 @@ fun.symLogisticsloginvd0.var=2;
 
 fun.weibull3para.fun=@(p,Il) p(3).*exp(-(Il./p(1)).^p(2));
 fun.weibull3para.nrpara=3;
-fun.weibull3para.LB=[0,0,0];
+fun.weibull3para.LB=[1e-2,0,0];
 fun.weibull3para.X0=[50,0.1,0.4];
 fun.weibull3para.UB=[1e2,10,1e2];
 fun.weibull3para.var=2;
 
 fun.weibull.fun=@(p,I) 1-exp(-(I./p(1)).^p(2));
 fun.weibull.nrpara=2;
-fun.weibull.LB=[0 0];
+fun.weibull.LB=[1e-6 0];
 fun.weibull.X0=[1 1];
 fun.weibull.UB=[1e5,1e5];
 fun.weibull.var=2;
@@ -146,7 +146,7 @@ fun.weibull.var=2;
 % Il=0 ==> p(1) Il = inf ==> 0 bend depends on value slope is asym
 fun.asymLogisticsloginv.fun=@(p,Il) p(1).*(1-1./(1+exp(p(2)./p(3)).*Il.^(-1./(p(3)*log(10)))+exp(p(4)./p(5)).*Il.^(-1./(p(5)*log(10)))));
 fun.asymLogisticsloginv.nrpara=5;
-fun.asymLogisticsloginv.LB=[0,-10,0,-10,0];
+fun.asymLogisticsloginv.LB=[0,-10,1e-6,-10,1e-6];
 fun.asymLogisticsloginv.X0=[1,0,1,3,1];
 fun.asymLogisticsloginv.UB=[10,10,20,10,20];
 fun.asymLogisticsloginv.var=2;

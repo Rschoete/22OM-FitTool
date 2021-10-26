@@ -237,7 +237,7 @@ end
         TauDA = @(p,X) combTauDA(TauDAVfun(p(pTDAVidx),X(:,VarTauDAV)),...
             TauDAIfun(p(pTDAIidx),X(:,VarTauDAI)));
 
-        yfunx = @(t,taux,xinf,x0) xinf+(x0-xinf).*exp(-t./taux);
+        yfunx = @(t,taux,xinf,x0) xinf+(x0-xinf).*exp(-(t.*double(t>=0))./taux);
 
         Oton = @(p,X,t) yfunx(t,TauO(p,X),OinfIfun(p(pOIidx),X(:,VarOinfI)),0);
         DAton = @(p,X,t) yfunx(t,TauDA(p,X),DAinfIfun(p(pDAIidx),X(:,VarDAinfI)),1);
@@ -348,8 +348,13 @@ end
                     CF = 0.1;
                     warning('CF for Tau Recov fixed to 0.1')
                 end
+                feat_extr_settings = {'ssReached_flag',options.FB.ssReached_flag,'segTauInact_startpoint',options.FB.segTauInact_startpoint};
+                if isfield(options.FB,'feat_extr_settings')
+                    feat_extr_settings = horzcat(feat_extr_settings,options.FB.feat_extr_settings);
+                end
+
                 OBJ = @(p) objfun_FB(p,tV_sp,tIl_sp,ton1_sp,toff1_sp,ton1_tr,toff1_tr,tVr,tIr,tTauOn,tTauOff,tTauInact,tTauRecov,...
-                    tIpeak,tIss,tIratio,iChR2fun_sp,iChR2fun_2p,TauDA,powerb,tend_sp,tend_tr,incl_tr_flag,CF,pos_nantargets,options.FB);
+                    tIpeak,tIss,tIratio,iChR2fun_sp,iChR2fun_2p,TauDA,powerb,tend_sp,tend_tr,incl_tr_flag,CF,pos_nantargets,feat_extr_settings,options.FB);
 
             otherwise
                 error('false method')
