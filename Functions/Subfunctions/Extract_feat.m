@@ -1,9 +1,10 @@
 function [Feature] = Extract_feat(time,I,OSpd,OSpstart,nrruns,PLOT,varargin)
 % this function extracts features necessary for fitting opsins
 %Ipeak,Iss,Iratio,Tauon,Tauoff,TauInact
+%When PLOT = 1, the fit to the raw data is visualized for each feature seperatly
 method = 'both';
-ssReached_flag = 1; %is steady-state reached at end of pulse? if False steady state value is extracted via curve fit
-segTauInact_startpoint = 0.005; %shift wrt peak current indicating start of segment Tau inact
+ssReached_flag = 1; %is steady-state reached at end of pulse? if False steady state value is extracted via curve fit of inactivation time constant
+segTauInact_startpoint = 0.005; %shift wrt peak current indicating start of segment Tau inact. this to eliminate the sigmoidal shape
 global fignr
 if isempty(fignr)
     fignr = get(gcf,'number')+1;
@@ -59,29 +60,31 @@ STOP=3;
 %Feature.Imean = trapz(time(time>=OSpstart),I(time>=OSpstart))/(time(end)-OSpstart);
 %Segmentation for curve fitting
 [~,loc_peaks] = max(abs(I(time>=OSpstart & time<=OSpstart+OSpd))); %find peak (during stimulation)
-loc_peaks = loc_peaks+sum(time<OSpstart); %adjust to right position
+loc_peaks = loc_peaks+sum(time<OSpstart); %adjust to right position, necessary to get corresponding time value as loc_peaks is obtained from a cropped I-array see line above 
 Feature.Ipeak = I(loc_peaks(1)); % place peak in structure current
 Iss_pulseEnd = mean(I(time>=OSpstart+0.9*OSpd & time<=OSpstart+0.95*OSpd)); % get steady state current candidate
-Feature.ttp = time(loc_peaks(1))-OSpstart;
+Feature.ttp = time(loc_peaks(1))-OSpstart; % time to peak feature
 if isnan(Iss_pulseEnd )
     Iss_pulseEnd  = I(time==max(time(time<=OSpstart+OSpd))); %if previous method couldnt define SS now take current closest but smaller than end of pulse
 end
-if abs(Feature.Ipeak)<=abs(Iss_pulseEnd) %Peak must always be larger than SS
-    STOP = 2; % no inactivation curve
-    Feature.Ipeak = Iss_pulseEnd;
+if abs(Feature.Ipeak)<=abs(Iss_pulseEnd) %Peak must always be larger than SS, If this is not the case we will not search for a inactivation time constant
+    STOP = 2; % When STOP = 2, the algorithm does not look for a inactivation time constant
+    Feature.Ipeak = Iss_pulseEnd; % alter peak value to ensure it is the highest value of during the entire pulse
     %loc_peaks=find(time==max(time(time<=OSpstart+OSpd)));
-    loc_peaks = find(time>OSpstart & time<=(OSpstart+OSpd) & I==Iss_pulseEnd);
+    loc_peaks = find(time>OSpstart & time<=(OSpstart+OSpd) & I==Iss_pulseEnd); %change location of peak accordingly
 end
 if ssReached_flag
     Feature.Iss = Iss_pulseEnd;
     Feature.Iratio=Feature.Iss/Feature.Ipeak;
 end
+
 %Tau on segment
-%SegTauon=find(time>=OSpstart+0.2*Feature.ttp & time<=time(loc_peaks(1))); % identify indices for segment Tauon
-SegTauonstart = find(abs(I)<=abs(Feature.Ipeak-0.75*(Feature.Ipeak-I(abs(time-OSpstart)==min(abs(time-OSpstart)))))); 
-%this method eliminates inclusion of photon reaction time see paper
+% identify indices for segment Tauon
+%SegTauon=find(time>=OSpstart+0.2*Feature.ttp & time<=time(loc_peaks(1)));
+%find start value for segment of TauOn fit, the method below eliminates inclusion of photon reaction time see paper. 
+SegTauonstart = find(abs(I)<=abs(Feature.Ipeak-0.75*(Feature.Ipeak-I(abs(time-OSpstart)==min(abs(time-OSpstart))))));
 SegTauonstart = SegTauonstart(SegTauonstart<loc_peaks(1));
-SegTauon=find(time>=time(SegTauonstart(end)) & time<=time(loc_peaks(1))); % identify indices for segment Tauon
+SegTauon=find(time>=time(SegTauonstart(end)) & time<=time(loc_peaks(1))); % identify indices for segment TauOn
 correct_flag = 1; % we correct becasue photon reaction time is not included
 if length(SegTauon)<3
 % if insufficient timepoints increase Tauon segment
@@ -89,6 +92,7 @@ if length(SegTauon)<3
     correct_flag = 0;
 end
 if length(SegTauon)<3
+% if still insufficient timepoints increase Tauon segment
     SegTauon=find(time>=0.1*OSpstart & time<=time(loc_peaks(1)));
     correct_flag = 0;
 end
@@ -97,6 +101,7 @@ tTauon=(time(SegTauon)-time(SegTauon(1))); ITauon=I(SegTauon);% time axis for ta
 
 
 %Tau off segment
+% 1.2 is included to make sure that not to many near 0 values are included. However if TauOff is expected to be larger than 20% of pulse duration this should be adjusted accordingly
 SegTauoff=find(time>=(OSpstart+OSpd) & time<=OSpstart+1.2*OSpd);
 if length(SegTauoff)<3
     SegTauoff=find(time>=(OSpstart+OSpd) & abs(I)>=0);
@@ -105,11 +110,13 @@ tTauoff=(time(SegTauoff)-time(SegTauoff(1))); ITauoff=I(SegTauoff);
 
 %Tau inact segment
 if time(loc_peaks(1))<=OSpstart+0.90*OSpd && STOP==3
+% only look for inactivation time constant if there is inactivation
     try
-        SegTauinact=find(time>=(time(loc_peaks(1))+segTauInact_startpoint) & time<=OSpstart+0.99*OSpd);
+        SegTauinact=find(time>=(time(loc_peaks(1))+segTauInact_startpoint) & time<=OSpstart+0.99*OSpd); %with 0.99 results appeard to be more robust However if insufficient timepoints selected, use whole pulse duration (see below) 
         tTauinact=(time(SegTauinact)-time(SegTauinact(1))); ITauinact=I(SegTauinact);
         STOP=3;
         if length(tTauinact)<3
+        % if insufficient timepoints increase Tauinact segment
             try
                 SegTauinact=find(time>=(time(loc_peaks(1))+segTauInact_startpoint) & time<=(OSpstart.OSpd));
                 tTauinact=(time(SegTauinact)-time(SegTauinact(1))); ITauinact=I(SegTauinact);
@@ -188,6 +195,7 @@ switch lower(method)
             %pause(0.01)
             if i==1
                 if correct_flag
+                % correct for exclusion of photon reaction time. Otherwise underestimation of activation time constant
                     b = b*(1-log((I(SegTauon(end))-I(SegTauon(1)))/I(SegTauon(end))));
                 end
                 Feature.TauOn=b;
@@ -201,6 +209,7 @@ switch lower(method)
             Feature.TauSSres(i)=fval;
             Feature.TauR2(i)=1-fval/sum((ITau{i}-mean(ITau{i})).^2);
             if PLOT
+            % create plots of rawdata vs model with extracted feature
                 Colors=[0, 0.4470, 0.7410;
                     0.8500, 0.3250, 0.0980;
                     0.9290, 0.6940, 0.1250;

@@ -110,13 +110,14 @@ try
     end
 
     %single pulse
-    X=[tV',tI'];
-    RMSMat=zeros(length(tV),6);
+    X=[tV',tI']; %concatenate target holding voltage and pulse intensity 
+    RMSMat=zeros(length(tV),6); % init cost matrix 
     for io=1:length(tV)
-        to=0:options.dt:tend_sp(io);
-        iChR2_sp = iChR2fun_sp(p,X(io,:),to,ton1_sp(io),toff1_sp(io));
-        Features=Extract_feat(to,iChR2_sp,toff1_sp(io)-ton1_sp(io),ton1_sp(io),options.nrr_featextr,options.plot_featextr,feat_extr_settings);
-
+        to=0:options.dt:tend_sp(io); % define time points for simulation io
+        iChR2_sp = iChR2fun_sp(p,X(io,:),to,ton1_sp(io),toff1_sp(io)); % calculate optocurrent under conditions X(io,:) for a voltage clamp at V=tV(io) and a pulse intensity of I=tI(io)
+        Features=Extract_feat(to,iChR2_sp,toff1_sp(io)-ton1_sp(io),ton1_sp(io),options.nrr_featextr,options.plot_featextr,feat_extr_settings); %Extract features of calculated opto current
+        
+        %calculate weighted RMS error and store in cost matrix
         RMSMat(io,:)=options.w(io,:).*[(tTauOn(io)-Features.TauOn),(tTauInact(io)-Features.TauInact),(tTauOff(io)-Features.TauOff),...
             (tIPeak(io)-Features.Ipeak),(tIss(io)-Features.Iss),(tRatio(io)-Features.Iratio)];
     end
